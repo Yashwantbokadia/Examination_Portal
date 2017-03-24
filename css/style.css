@@ -324,7 +324,7 @@ img {
   background: rgba(38, 39, 44, 0.9);
 }
 #fh5co-home, #fh5co-home .text-wrap {
-  height: 900px;
+  height: 650px;
 }
 #fh5co-home .text-wrap {
   display: table;
@@ -400,11 +400,11 @@ img {
 }
 
 #fh5co-about {
-  padding: 7em 0;
+  padding: 2em 0;
 }
 @media screen and (max-width: 768px) {
   #fh5co-about {
-    padding: 4em 0;
+    padding: 2em 0;
   }
 }
 
