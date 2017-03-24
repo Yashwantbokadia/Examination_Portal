@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -8,9 +9,22 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Admin Panel</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Online Examination Portal" />
-	<meta name="keywords" content="Online Examination Portal php css html " />
-	<meta name="author" content="" />
+	<meta name="description" content="Free HTML5 Template by FreeHTML5.CO" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FreeHTML5.cO" />
+
+  
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<link rel="shortcut icon" href="favicon.ico">
@@ -56,7 +70,7 @@
 						<li><a href="#" data-nav-section="about"><span>View Requests</span></a></li>
 						<li><a href="#" data-nav-section="services"><span>View Schedule</span></a></li>
 						<li><a href="#" data-nav-section="contact"><span>Generate Records</span></a></li>
-						<li><a href="#" data-nav-section="contact"><span>Logout</span></a></li>
+						<li><a href="#"><span>Logout</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -88,7 +102,7 @@
 												$j=$i+1;
 												$row = mysql_fetch_array( $result );
 												$email=$row['email'];
-												echo "<tr><td>$j</td><td>$email</td><td><form action='deleteadmin.php' method='post' align='center'>
+												echo "<tr><td>$j</td><td>$email</td><td><form action='deleteinstitute.php' method='post' align='center'>
 												<input type='hidden' value='".$email."'name='email'>
 												<button type='submit' class='btn btn-danger btn-sm'>Delete</button>
 												</form>
@@ -109,29 +123,26 @@
 		<div class="container">
 
 			<div class="row">
-				<div class="col-md-7 col-md-pull-1">
-					<img src="images/img_1.jpg" class="img-shadow img-responsive" alt="Free HTML5 Bootstrap Template">
-				</div>
 				<div class="col-md-5">
 					<h1  align="center">LIST OF ALL ENQUIRIES</h1><br>
 					<div  style="border:px solid black; align:center; margin:0px auto;">
-						<table class="table table-bordered"  align="left">
+						<table class="table table-bordered"  align="center">
 							<?php
 								require('db.php');
 								$query="SELECT * FROM `enquiry`";
 								$result=mysql_query($query);
 								$no=mysql_num_rows($result);
-								for ($i=0;$i<$no;$i++)
-								{ 
-									$j=$i+1;
-									$row = mysql_fetch_array( $result );
-									$email=$row['email'];
-									echo "<tr><td>$j</td><td>$email</td><td>$Name</td><td>$message</td><td><form action='deleteadmin.php' method='post' align='center'>
-									<input type='hidden' value='".$email."'name='email'>
-									<button type='submit' class='btn btn-danger btn-sm'>Delete</button>
-									</form>
-							 		</td></tr><br>";
-							 	}
+
+								
+									for ($i=0;$i<$no;$i++)
+										{ 
+											$j=$i+1;
+											$row = mysql_fetch_array( $result );
+											$email=$row['email'];
+											$name=$row['Name'];
+											$message=$row['message'];
+											echo "<tr><td>$j</td><td>$name</td><td>$email</td><td>$message</td></tr><br>";
+							 			}
 							?>
 						</table>
 					</div>
@@ -146,7 +157,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 section-heading text-center">
-						<h2 class="to-animate">Our  Features</h2>
+						<h2 class="to-animate">Your Upcoming Schedule</h2>
 						<div class="row">
 							<div class="col-md-8 col-md-offset-2 subtext">
 								<h3 class="to-animate">Here are the few features of the services which we provide you </h3>
