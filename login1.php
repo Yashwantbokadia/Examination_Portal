@@ -22,7 +22,7 @@ include ("db.php");
     header("location:dashboard.php");
     else
     {
-      header("location:login1.php? logincheck=1");
+      header("location:login2.php? logincheck=1");
     }
   }
     ?>

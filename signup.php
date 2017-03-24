@@ -7,6 +7,7 @@ $institute = $_POST['institute'];
 $mail = $_POST['email'];
 $pass = $_POST['password'];
 $phone = $_POST['phone'];
+$passkey = $_POST['Passkey'];
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -15,21 +16,22 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "INSERT INTO `institute` VALUES ('".$uname."','".$mail."','".$pass."','".$phone."','".$institute."')";
+$sql = "INSERT INTO `institute` VALUES ('".$institute."','".$mail."','".$pass."','".$phone."','".$passkey."')";
 
-$sql = "CREATE TABLE student (
-
-usr VARCHAR(30) NOT NULL,
-pwd VARCHAR(30) NOT NULL,
-mailid VARCHAR(50),
-reg_date TIMESTAMP
+$sql1 = "CREATE TABLE ".$institute." (
+id VARCHAR(30) AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(30) NOT NULL,
+rollno VARCHAR(15),
+email VARCHAR(50),
+password VARCHAR(20),
+branch TEXT(5)
 )";
 
 
-if ($conn->query($sql) === TRUE) {
-	   header("Location:dashboard.php");
+if ($conn->query($sql1) === TRUE) {
+	   echo "created sucessfully";
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $sql1 . "<br>" . $conn->error;
 }
 
 $conn->close();
