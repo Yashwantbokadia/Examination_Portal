@@ -94,7 +94,7 @@
 			</nav>
 		</header>
 		<div id="login" class="container">
-			<form class="form-horizontal" action="login.php" method="POST">
+			<form class="form-horizontal" action="login1.php" method="POST">
 				<h2 align="center">LOGIN HERE</h2>
 			  <div class="form-group">
 			    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
