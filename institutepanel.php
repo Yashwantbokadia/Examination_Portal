@@ -90,29 +90,47 @@
 		<br><br><br><br><br><br><br><br>
 		<div class="row" style="padding-left: 250px;">
 			<div class="col-sm-4">
-				<input type="submit" class="btn btn-danger btn-lg" id="onsubmit" name="submit1" value="Upload Paper">
+				<input type="submit" class="btn btn-danger btn-lg" id="onsubmit1" name="submit1" value="Upload Paper">
 			</div> 
 			<div class="col-sm-4">
-				<input type="submit" class="btn btn-danger btn-lg" value="Add Student">
+				<input type="submit" class="btn btn-danger btn-lg" id="onsubmit2" name="submit2" value="Add Student">
 			</div>
 			<div class="col-sm-4">
-				<input type="submit" class="btn btn-danger btn-lg" value="Create Exam" >
+				<input type="submit" class="btn btn-danger btn-lg" id="onsubmit3" name="submit3" value="Create Exam" >
 			</div>
 		</div>
 		<br><br><br><br>
 		<div class="row">
 		<center>
 		<?php
-				if(isset($_POST['submit1']))
+				if(isset($_POST['submit2']))
 
 				{
                    echo "<script>
-                   var x=document.getElementById('onsubmit');
+                   var x=document.getElementById('onsubmit2');
                    if(x)
                    	window.location.href='importstudentData1.php';
                    </script>";
 				}
-				?>
+				if(isset($_POST['submit1']))
+
+				{
+                   echo "<script>
+                   var x=document.getElementById('onsubmit1');
+                   if(x)
+                   	window.location.href='importquesbank1.php';
+                   </script>";
+				}
+				if(isset($_POST['submit3']))
+
+				{
+                   echo "<script>
+                   var x=document.getElementById('onsubmit3');
+                   if(x)
+                   	window.location.href='';
+                   </script>";
+				}
+		?>
 		</center>		 
 		</div>
 				</header>
