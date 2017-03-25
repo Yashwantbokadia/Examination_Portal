@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,8 +17,8 @@ include ("db.php");
     $passkey = $_POST['Passkey'];
     //Checking is user existing in the database or not
     $query = "SELECT * FROM `login` WHERE email='".$uname."' and password='".$pass."'";
-    $result = mysql_query($query) or die(mysql_error());
-    $rows = mysql_num_rows($result);
+    $result = $db->query($query)
+    $rows = mysqli_num_rows($result);
     if($rows>=1)
     header("location:dashboard.php");
     else

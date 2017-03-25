@@ -1,8 +1,10 @@
+
 <?php
 
 	include('db.php');
 	
 	session_start();
+	$_SESSION["username"] = $_POST['email'];
 	
 	if(isset($_POST['submit']))// If form submitted, insert values into the database.
 	{
@@ -19,9 +21,10 @@
 		{
 			$query = "SELECT * FROM `admin` WHERE email='".$email."' and password='".$password."'";
 
-			$result = mysql_query($query) or die(mysql_error());
-		
-			$rows = mysql_num_rows($result);
+
+
+			$result = $db->query($query);		
+			$rows = mysqli_num_rows($result);
 
 			if($rows==1)
 			{
@@ -38,14 +41,14 @@
 
 			$query = "SELECT * FROM `institute` WHERE email='$email' and password='".$password."'";
 
-			$result = mysql_query($query) or die(mysql_error());
+			$result = $db->query($query);
 		
-			$rows = mysql_num_rows($result);
+			$rows = mysqli_num_rows($result);
 			
 			if($rows == 1)
 			{
 			
-				
+
 				header("Location: institutepanel.php"); // Redirect user to index.php
 			}
 			else

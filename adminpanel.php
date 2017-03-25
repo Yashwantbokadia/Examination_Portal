@@ -1,4 +1,7 @@
 
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -92,15 +95,15 @@
 										<?php
 											include('db.php');
 											$query="SELECT * FROM `institute`";
-											$result=mysql_query($query);
-											$no=mysql_num_rows($result);
+											$result=$db->query($query);
+											$no=mysqli_num_rows($result);
 											echo $no;
 
 
 											for ($i=0;$i<$no;$i++)
 											{ 
 												$j=$i+1;
-												$row = mysql_fetch_array( $result );
+												$row = mysqli_fetch_array( $result );
 												$email=$row['email'];
 												echo "<tr><td>$j</td><td>$email</td><td><form action='deleteinstitute.php' method='post' align='center'>
 												<input type='hidden' value='".$email."'name='email'>
@@ -130,14 +133,14 @@
 							<?php
 								require('db.php');
 								$query="SELECT * FROM `enquiry`";
-								$result=mysql_query($query);
-								$no=mysql_num_rows($result);
+								$result=$db->query($query);
+								$no=mysqli_num_rows($result);
 
 								
 									for ($i=0;$i<$no;$i++)
 										{ 
 											$j=$i+1;
-											$row = mysql_fetch_array( $result );
+											$row = mysqli_fetch_array( $result );
 											$email=$row['email'];
 											$name=$row['Name'];
 											$message=$row['message'];

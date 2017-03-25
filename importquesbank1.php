@@ -1,3 +1,7 @@
+
+<?php
+session_start();
+?>
 <?php
 //load the database configuration file
 include 'db.php';

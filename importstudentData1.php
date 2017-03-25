@@ -1,6 +1,12 @@
 <?php
-//load the database configuration file
+session_start();
 include 'db.php';
+$mail  = $_SESSION["username"];
+$query = "SELECT institute FROM institute WHERE email =  '$mail'";
+$result = $db->query($query);
+$row = mysqli_fetch_array($result);
+?> 
+<?php
 
 if(!empty($_GET['status'])){
     switch($_GET['status']){
@@ -69,7 +75,7 @@ if(!empty($_GET['status'])){
                 <tbody> 
                     <?php
                     //get rows query
-                    $query = $db->query("SELECT * FROM vaib ORDER BY id +0 ASC");
+                    $query = $db->query("SELECT * FROM `".$row['institute']."` ORDER BY id +0 ASC");
                     if($query->num_rows > 0){ 
                         while($row = $query->fetch_assoc()){
                         ?>
