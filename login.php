@@ -3,6 +3,7 @@
 	include('db.php');
 	
 	session_start();
+	$email=$_SESSION['email'];
 
 	if(isset($_POST['email']))// If form submitted, insert values into the database.
 	{
