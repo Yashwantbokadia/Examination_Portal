@@ -66,15 +66,6 @@
 
 	</head>
 	<body>
-	<?php
-	$check = $_GET['logincheck'];
-	if(isset($check))
-	{
-		echo '<script>';
-		echo 'alert("Email/Password incorrect.")';
-		echo '</script>';
-	}
-	?>
 		<header role="banner" id="fh5co-header">
 			
 			<nav class="navbar navbar-default">
@@ -99,19 +90,19 @@
 			  <div class="form-group">
 			    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 			    <div class="col-sm-10">
-			      <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+			      <input type="email" class="form-control" id="email" name="email" placeholder="Email">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
 			    <div class="col-sm-10">
-			      <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+			      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
 			    </div>
 			  </div>
 			  <div class="form-group">
 			    <label for="inputEmail3" class="col-sm-2 control-label">Passkey</label>
 			    <div class="col-sm-10">
-			      <input type="number" class="form-control" id="Passkey" name="Passkey" placeholder="Enter Passkey" required>
+			      <input type="number" class="form-control" id="Passkey" name="Passkey" placeholder="Enter Passkey">
 			    </div>
 			  </div>
 			  <div class="form-group">

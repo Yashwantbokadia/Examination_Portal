@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -6,7 +7,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Login</title>
+	<title>Dashboard</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Template by FreeHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -66,15 +67,6 @@
 
 	</head>
 	<body>
-	<?php
-	$check = $_GET['logincheck'];
-	if(isset($check))
-	{
-		echo '<script>';
-		echo 'alert("Email/Password incorrect.")';
-		echo '</script>';
-	}
-	?>
 		<header role="banner" id="fh5co-header">
 			
 			<nav class="navbar navbar-default">
@@ -90,36 +82,36 @@
 						</ul>
 					</div>
 				</div>
-
-			</nav>
-		</header>
-		<div id="login" class="container">
-			<form class="form-horizontal" action="login1.php" method="POST">
-				<h2 align="center">LOGIN HERE</h2>
-			  <div class="form-group">
-			    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-			    <div class="col-sm-10">
-			      <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-			    <div class="col-sm-10">
-			      <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="inputEmail3" class="col-sm-2 control-label">Passkey</label>
-			    <div class="col-sm-10">
-			      <input type="number" class="form-control" id="Passkey" name="Passkey" placeholder="Enter Passkey" required>
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="submit" class="btn btn-default" name="login1">Sign in</button>
-			    </div>
-			  </div>
-			</form>
-		</div>
-	</body>
-</html>	
+				</nav>
+				<h2><span id="countdown" class="timer" style="padding-top: 10px;float: right;padding-right:10px;"></span></h2>
+<script>
+var upgradeTime = 5;
+var seconds = upgradeTime;
+function timer() {
+    var days        = Math.floor(seconds/24/60/60);
+    var hoursLeft   = Math.floor((seconds) - (days*86400));
+    var hours       = Math.floor(hoursLeft/3600);
+    var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+    var minutes     = Math.floor(minutesLeft/60);
+    var remainingSeconds = seconds % 60;
+    if (remainingSeconds < 10) {
+        remainingSeconds = "0" + remainingSeconds; 
+    }
+     if (minutes < 10) {
+        minutes = "0" + minutes; 
+    }
+    if (hours < 10) {
+        hours = "0" + hours; 
+    }
+    document.getElementById('countdown').innerHTML =  hours + ":" + minutes + ":" + remainingSeconds;
+    if (seconds == 0) {
+        clearInterval(countdownTimer);
+      var x = document.getElementById("countdown").innerHTML;
+      if(x)
+      window.location.href = ('dashboard.php');
+    } else {
+        seconds--;
+    }
+}
+var countdownTimer = setInterval('timer()', 1000);
+</script>
