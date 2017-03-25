@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -85,7 +87,7 @@
 				</nav>
 				<h2><span id="countdown" class="timer" style="padding-top: 10px;float: right;padding-right:10px;"></span></h2>
 <script>
-var upgradeTime = 9000;
+var upgradeTime = 120;
 var seconds = upgradeTime;
 function timer() {
     var days        = Math.floor(seconds/24/60/60);
