@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -76,18 +74,46 @@ session_start();
 					<div class="navbar-header">
 						<!-- Mobile Toggle Menu Button -->
 						<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-						<a class="navbar-brand" href="index.html"><span>Online Examination Portal</span></a> 
+						<a class="navbar-brand" href="index.html"><span >Online Examination Portal</span></a> 
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav navbar-right">
-							<li><h2><span>Welcome</span></h2></li>
+							<li><h2><span >Welcome</span></h2></li>
 						</ul>
 					</div>
 				</div>
 				</nav>
-				<h2><span id="countdown" class="timer" style="padding-top: 10px;float: right;padding-right:10px;"></span></h2>
+				<div class="text-right">
+				<h2><span id="countdown" class="timer" ></span></h2>
+				</div>
+				<div class="container well scrol" style="background-color:white,">
+					                                        <b>  <center>
+					                                          <h1 style="color: black"> Exam Instructions for Students</h1>
+					                                          <br> 
+
+<h2 class="text-left" style="color: black">Exam information:</h2></b>
+<h4 class="text-left" style="color: black">
+•	Each question is of 1 mark.
+<br><br><br>
+•	Total time allotted is 2 hours 30 min.
+<br><br><br>
+•	After completing the exam hit the submit button to submit.
+<br><br><br>
+•	In case of connection lost contact invigilator immediately. 
+<br><br><br>
+•	Do not bring any unauthorised material (e.g. written notes, notes in dictionaries, paper, and sticky tape eraser). Pencil cases and &nbsp;&nbsp;glasses cases must not be taken to your desks. These will be checked and confiscated. 
+<br><br><br>
+•	You are allowed to bring tissue Paper and a drink (but not food) into the exam. 
+<br><br><br>
+•	Ensure that you use the washroom before arriving for your exam as you will not be permitted to leave during the first hour. In the case  &nbsp; of listening and oral exams you may not be allowed to leave during the exam. 
+
+				</center></div>
+				<div><ul class="pager">
+  
+    <li><a class="jumbotron" href="dashboard.php" style="color: black;"><b>Start Exam</b></a></li>
+  </ul></div>
 <script>
-var upgradeTime = 5;
+var upgradeTime = 120;
 var seconds = upgradeTime;
 function timer() {
     var days        = Math.floor(seconds/24/60/60);
