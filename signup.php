@@ -20,7 +20,11 @@ $passkey = $_POST['Passkey'];
 		die("Database Selection Failed" . mysql_error());
 	}
 
+<<<<<<< HEAD
 $sql = "INSERT INTO `institute` VALUES ('".$institute."','".$mail."','".md5($pass)."','".$phone."','".$passkey."')";
+=======
+$sql = "INSERT INTO `institute` VALUES ('".$institute."','".$mail."','".$pass."','".$phone."','".$passkey."')";
+>>>>>>> origin/OEP-1
  mysql_select_db( 'oep' );
 $retval = mysql_query("CREATE TABLE ".$institute." (".
 ".id VARCHAR(30) ,".
@@ -34,6 +38,10 @@ if(! $retval )
 {
   die('Could not create table: ' . mysql_error());
 }
+<<<<<<< HEAD
 header("location:login.php");
+=======
+header("location:dashboard.php");
+>>>>>>> origin/OEP-1
 $conn->close();
 ?>
