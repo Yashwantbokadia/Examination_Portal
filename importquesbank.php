@@ -1,9 +1,13 @@
 <?php
-session_start();
-?>
-<?php
 //load the database configuration file
 include 'db.php';
+session_start();
+$_SESSION["username"];
+if(!$_SESSION["username"])
+    {
+      header("location:login.php");
+      
+    }
 if(isset($_POST['importSubmit'])){
     
     //validate whether uploaded file is a csv file
@@ -19,15 +23,15 @@ if(isset($_POST['importSubmit'])){
             
             //parse data from csv file line by line
             while(($line = fgetcsv($csvFile)) !== FALSE){
-                //check whether member already exists in database with same email
-                $prevQuery = "SELECT id FROM vaib WHERE email = '".$line[3]."'";
-                $prevResult = $db->query($prevQuery);
+                //check whether member already exists in database with same question
+                $prevQuery = "SELECT id FROM exam1 WHERE ques = '".$line[0]."'";
+                $prevResult = $conn->query($prevQuery);
                 if($prevResult->num_rows > 0){
                     //update member data
-                    $db->query("UPDATE vaib SET id = '".$line[0]."', name = '".$line[1]."', rollno = '".$line[2]."', email = '".$line[3]."', password = '".$line[4]."', branch = '".$line[5]."' WHERE email = '".$line[3]."'");
+                    $conn->query("UPDATE exam1 SET option_a = '".$line[1]."', option_b = '".$line[2]."', option_c = '".$line[3]."', option_d = '".$line[4]."', answer = '".$line[5]."' WHERE ques = '".$line[0]."'");
                 }else{
                     //insert member data into database
-                    $db->query("INSERT INTO vaib  VALUES ('".$line[0]."','".$line[1]."','".$line[2]."','".$line[3]."','".$line[4]."','".$line[5]."','".$line[6]."')");
+                    $conn->query("INSERT INTO exam1 (ques,option_a,option_b,option_c,option_d,answer) VALUES ('".$line[0]."','".$line[1]."','".$line[2]."','".$line[3]."','".$line[4]."','".$line[5]."')");
                 }
             }
             
@@ -44,4 +48,5 @@ if(isset($_POST['importSubmit'])){
 }
 
 //redirect to the listing page
-header("Location: index.php".$qstring);
+header("Location: importquesbank1.php".$qstring);
+?>

@@ -1,10 +1,12 @@
-<<<<<<< HEAD
-
-=======
 <?php
 session_start();
+$_SESSION["username"];
+if(!$_SESSION["username"])
+    {
+      header("location:login.php");
+      
+    }
 ?>
->>>>>>> origin/master
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -85,9 +87,12 @@ session_start();
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav navbar-right">
-							<li><h2><span>Welcome</span></h2></li>
+							<li><h2><span>Welcome, <?php echo $_SESSION["username"] ; ?></span></h2></li>
+							<ul class="pager">
+  
+    <li><a class="jumbotron" href="logout.php" style="color: black;"><b>Logout</b></a></li>
 						</ul>
-					</div>
+					
 				</div>
 				</nav>
 					<div class="page-header">
@@ -96,38 +101,27 @@ session_start();
 		<br><br><br><br><br><br><br><br>
 		<div class="row" style="padding-left: 250px;">
 			<div class="col-sm-4">
-<<<<<<< HEAD
-				<input type="submit" class="btn btn-danger btn-lg" name="submit1" value="Upload Paper">
-			</div> 
-			<div class="col-sm-4">
-				<input type="submit" class="btn btn-danger btn-lg" value="Add Student">
-			</div>
-			<div class="col-sm-4">
-				<input type="submit" class="btn btn-danger btn-lg" value="Create Exam" >
-=======
 				<input type="submit" class="btn btn-danger btn-lg" id="onsubmit1" name="submit1" value="Upload Paper">
 			</div> 
 			<div class="col-sm-4">
 				<input type="submit" class="btn btn-danger btn-lg" id="onsubmit2" name="submit2" value="Add Student">
 			</div>
 			<div class="col-sm-4">
-				<input type="submit" class="btn btn-danger btn-lg" id="onsubmit3" name="submit3" value="Create Exam" >
->>>>>>> origin/master
+				<input type="submit" class="btn btn-danger btn-lg" id="onsubmit3" name="submit3" value="Generate Report" >
 			</div>
 		</div>
 		<br><br><br><br>
 		<div class="row">
 		<center>
 		<?php
-<<<<<<< HEAD
 				if(isset($_POST['submit1']))
-
-				 echo"
-				<label>Choose paper</label>
-				 <input type='file' class='btn btn-danger' value='Choose Paper' title='hi'>";
-
-				 ?>
-=======
+				{
+                   echo "<script>
+                   var x=document.getElementById('onsubmit1');
+                   if(x)
+                   	window.location.href='importquesbank1.php';
+                   </script>";
+				}
 				if(isset($_POST['submit2']))
 
 				{
@@ -137,26 +131,16 @@ session_start();
                    	window.location.href='importstudentData1.php';
                    </script>";
 				}
-				if(isset($_POST['submit1']))
-
-				{
-                   echo "<script>
-                   var x=document.getElementById('onsubmit1');
-                   if(x)
-                   	window.location.href='importquesbank1.php';
-                   </script>";
-				}
 				if(isset($_POST['submit3']))
 
 				{
                    echo "<script>
                    var x=document.getElementById('onsubmit3');
                    if(x)
-                   	window.location.href='';
+                   	window.location.href='report.php';
                    </script>";
 				}
 		?>
->>>>>>> origin/master
 		</center>		 
 		</div>
 				</header>

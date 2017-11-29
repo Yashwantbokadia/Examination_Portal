@@ -6,7 +6,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SignUp</title>
+	<title>Dashboard</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Template by FreeHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -66,15 +66,21 @@
 
 	</head>
 	<body>
-		<?php
-	$check1 = $_GET['signupcheck'];
-	if(isset($check1))
-	{
-		echo '<script>';
-		echo 'alert("Institute OR Email already exists.Choose unique name and email !")';
-		echo '</script>';
-	}
-	?>
+	<style>
+table, th, td {
+    border-collapse: collapse;
+  	border-spacing: 0;
+  	border-width: auto;
+  	width: 100%;
+  	padding-left: 0px;
+  	font-style: italic;
+  	font-weight: bold;
+  	font-stretch: expanded;
+  	font-family: 'Tangerine' ,serif;
+  	font-size: 18px;
+  	text-align: center;
+}
+</style>
 		<header role="banner" id="fh5co-header">
 			
 			<nav class="navbar navbar-default">
@@ -82,56 +88,73 @@
 					<div class="navbar-header">
 						<!-- Mobile Toggle Menu Button -->
 						<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-						<a class="navbar-brand" href="index.html"><span>Online Examination Portal</span></a> 
+						<a class="navbar-brand" href="#"><span>Online Examination Portal</span></a> 
 					</div>
-					<div id="navbar" class="navbar-collapse collapse">
+					<div id="navbar" >
 						<ul class="nav navbar-nav navbar-right">
-							<li><h2><span>Welcome</span></h2></li>
+							<li><h2>
+							<span id="countdown" class="timer"></span></h2></li></div>
 						</ul>
 					</div>
 				</div>
-
-			</nav>
-		</header>
-		<div id="signup" class="container">
-			<form class="form-horizontal" action="checksignup.php" method="POST">
-				<h2 align="center">Sign Up Here</h2>
-				<div class="form-group">
-			    <label for="inputEmail3" class="col-sm-2 control-label">Institute</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="Name" name="institute" placeholder="Institute Name" required="true">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-			    <div class="col-sm-10">
-			      <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="true">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-			    <div class="col-sm-10">
-			      <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="true">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="inputEmail3" class="col-sm-2 control-label">Phone</label>
-			    <div class="col-sm-10">
-			      <input type="text" maxlength="10" pattern="[0-9]{10}" class="form-control" id="phone" name="phone" placeholder="Phone" required="true">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="inputEmail3" class="col-sm-2 control-label">Registration Key</label>
-			    <div class="col-sm-10">
-			      <input type="" maxlength="10" pattern="[0-9]{10}" class="form-control" id="passkey" name="passkey" placeholder="Request admin for registration key" required="true">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="submit" name="signup" class="btn btn-primary btn-sm">Sign UP</button>
-			    </div>
-			  </div>
-			</form>
-		</div>
+				</nav>
+	<div class="jumbotron">
+		<?php
+session_start();
+include 'db.php';
+$_SESSION["username"];
+$query1 = $conn->query("SELECT institute FROM institute where email='".$_SESSION['username']."' ");
+$row1 = $query1->fetch_assoc();
+$inst=strtoupper($row1['institute']);
+echo "<h1><center>$inst</center></h1>";
+if(!$_SESSION["username"])
+    {
+      header("location:login.php");
+    }
+else
+{
+	$query = $conn->query("SELECT * FROM login where institute='".$inst."' ORDER BY id ");
+    if($query->num_rows > 0){ 
+    	echo "<table>";
+		echo "<thead>";
+		echo "<tr>";
+		echo "<th >ID</th>";
+		echo "<th >NAME</th>";
+		echo "<th >EMAIL</th>";
+		echo "<th >BRANCH</th>";
+		echo "<th >SCORE</th>";
+		echo "</tr>";
+		echo("</thead>");
+		echo "</table>";              
+    while($row = $query->fetch_assoc())
+	{
+		echo "<table>";
+		echo "<thead>";
+		echo "<tr>";
+		echo "<td >".$row['id']."</td>";
+		echo "<td style=text-align:left>".$row['name']."</td>";
+		echo "<td style=text-align:left>".$row['email']."</td>";
+		echo "<td style=text-align:left>".$row['branch']."</td>";
+		echo "<td >".$row['score']."</td>";
+		echo "</tr>";
+		echo("</thead>");
+		echo "</table>";              
+	}
+}
+}
+	?>
+	<br>
+	<div><ul class="pager">
+    <li><a class="jumbotron" href="logout.php" style="color: black;"><b>Logout</b></a></li>
+  </ul></div>
+	</div>
+	</header>
 	</body>
-</html>	
+	</html>
+
+
+<?php
+	require("fpdf.php");
+?>
+
+	

@@ -8,6 +8,6 @@ session_start();
 	$message=$_POST['message'];
 	$query = "INSERT INTO `enquiry` (Name,email,message)
 			VALUES ('$name','$email','$message');";
-	$enquiry=$db->query($query);
+	$enquiry=$conn->query($query);
 	header("location:index.html");
 ?>

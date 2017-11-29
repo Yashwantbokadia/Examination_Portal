@@ -1,67 +1,106 @@
-
 <?php
-
-	include('db.php');
-	
-	session_start();
-<<<<<<< HEAD
-	$email=$_SESSION['email'];
-
-	if(isset($_POST['email']))// If form submitted, insert values into the database.
-=======
-	$_SESSION["username"] = $_POST['email'];
-	
-	if(isset($_POST['submit']))// If form submitted, insert values into the database.
->>>>>>> origin/master
-	{
-		$email = $_POST['email']; 
-		$password = $_POST['password'];
-		$role = $_POST['role'];
-		//$username = stripslashes($email);
-		//$username = mysql_real_escape_string($email); 	
-		//$password = stripslashes($password);
-		//$password = mysql_real_escape_string($password);
-		//Checking is user existing in the database or not
-		
-		if ($role=="ADMINISTRATOR")
-		{
-			$query = "SELECT * FROM `admin` WHERE email='".$email."' and password='".$password."'";
-
-
-
-			$result = $db->query($query);		
-			$rows = mysqli_num_rows($result);
-
-			if($rows==1)
-			{
-			
-				header("Location: adminpanel.php"); // Redirect user to index.php
-			}
-			else
-			{
-			echo"something is wrong1";
-			}
-		}
-		else if($role=="INSTITUTE")
-		{	
-
-			$query = "SELECT * FROM `institute` WHERE email='$email' and password='".$password."'";
-
-			$result = $db->query($query);
-		
-			$rows = mysqli_num_rows($result);
-			
-			if($rows == 1)
-			{
-			
-
-				header("Location: institutepanel.php"); // Redirect user to index.php
-			}
-			else
-			{
-			echo"something is wrong2";
-			}
-		}
-	}
+include 'db.php';
+session_start();
 ?>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Login</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Simple Line Icons -->
+	<link rel="stylesheet" href="css/simple-line-icons.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<!-- Style -->
+	<link rel="stylesheet" href="css/style.css">
+
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+	<?php
+	$check1 = $_GET['logincheck'];
+	if(isset($check1))
+	{
+		echo '<script>';
+		echo 'alert("Email/Password incorrect.")';
+		echo '</script>';
+	}
+	?>
+		<header role="banner" id="fh5co-header">
 			
+			<nav class="navbar navbar-default">
+				<div class="container">
+					<div class="navbar-header">
+						<!-- Mobile Toggle Menu Button -->
+						<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
+						<a class="navbar-brand" href="index.html"><span>Online Examination Portal</span></a> 
+					</div>
+					<div id="navbar" class="navbar-collapse collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li><h2><span>Welcome</span></h2></li>
+						</ul>
+					</div>
+				</div>
+
+			</nav>
+		</header>
+		<div id="login" class="container">
+			<form class="form-horizontal" action="checklogin.php" method="POST">
+				<h2 align="center">LOGIN HERE</h2>
+			  <div class="form-group">
+			    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+			    <div class="col-sm-10">
+			      <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+			    <div class="col-sm-10">
+			      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputPassword3" class="col-sm-2 control-label" >ROLE</label>
+			    <div class="col-sm-10">
+			     	<div class="form-group">
+				    	<div class="col-sm-10">
+				      		<select class="form-control" name="role">
+  								<option>ADMINISTRATOR</option>
+ 								<option>INSTITUTE</option>
+							</select>
+				   	 	</div>
+			  		</div>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <button type="submit" class="btn btn-danger" name="submit">Sign in</button>
+			    </div>
+			  </div>
+			</form>
+		</div>
+	</body>
+</html>	

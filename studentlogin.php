@@ -1,11 +1,7 @@
 <?php
+include 'db.php';
 session_start();
-$_SESSION["emailid"];
-if(!$_SESSION["emailid"])
-    {
-      header("location:studentlogin.php");
-      
-    }
+
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -15,7 +11,7 @@ if(!$_SESSION["emailid"])
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Dashboard</title>
+	<title>Login</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Template by FreeHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -75,6 +71,15 @@ if(!$_SESSION["emailid"])
 
 	</head>
 	<body>
+	<?php
+	$check1 = $_GET['logincheck'];
+	if(isset($check1))
+	{
+		echo '<script>';
+		echo 'alert("Email/Password incorrect.")';
+		echo '</script>';
+	}
+	?>
 		<header role="banner" id="fh5co-header">
 			
 			<nav class="navbar navbar-default">
@@ -82,74 +87,38 @@ if(!$_SESSION["emailid"])
 					<div class="navbar-header">
 						<!-- Mobile Toggle Menu Button -->
 						<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-						<a class="navbar-brand" href="index.html"><span >Online Examination Portal</span></a> 
+						<a class="navbar-brand" href="index.html"><span>Online Examination Portal</span></a> 
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav navbar-right">
-							<li><h2><span >Welcome , <?php echo $_SESSION["emailid"]; ?></span></h2></li>
+							<li><h2><span>Welcome</span></h2></li>
 						</ul>
 					</div>
 				</div>
-				</nav>
-				<div class="text-right">
-				<h2><span id="countdown" class="timer" ></span></h2>
-				</div>
-				<div class="container well scrol" style="background-color:white,">
-					                                        <b>  <center>
-					                                          <h1 style="color: black"> Exam Instructions for Students</h1>
-					                                          <br> 
 
-<h2 class="text-left" style="color: black">Exam information:</h2></b>
-<h4 class="text-left" style="color: black">
-•	Each question is of 1 mark.
-<br><br><br>
-•	Total time allotted is 2 hours 30 min.
-<br><br><br>
-•	After completing the exam hit the submit button to submit.
-<br><br><br>
-•	In case of connection lost contact invigilator immediately. 
-<br><br><br>
-•	Do not bring any unauthorised material (e.g. written notes, notes in dictionaries, paper, and sticky tape eraser). Pencil cases and &nbsp;&nbsp;glasses cases must not be taken to your desks. These will be checked and confiscated. 
-<br><br><br>
-•	You are allowed to bring tissue Paper and a drink (but not food) into the exam. 
-<br><br><br>
-•	Please do not refresh or go back during the exam.
-<br><br><br>
-•	Ensure that you use the washroom before arriving for your exam as you will not be permitted to leave during the first hour. In the case  &nbsp; of listening and oral exams you may not be allowed to leave during the exam. 
-
-				</center></div>
-				<div><ul class="pager">
-  
-    <li><a class="jumbotron" href="dashboard1.php" style="color: black;"><b>Start Exam</b></a></li>
-  </ul></div>
-<script>
-var upgradeTime = 120;
-var seconds = upgradeTime;
-function timer() {
-    var days        = Math.floor(seconds/24/60/60);
-    var hoursLeft   = Math.floor((seconds) - (days*86400));
-    var hours       = Math.floor(hoursLeft/3600);
-    var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
-    var minutes     = Math.floor(minutesLeft/60);
-    var remainingSeconds = seconds % 60;
-    if (remainingSeconds < 10) {
-        remainingSeconds = "0" + remainingSeconds; 
-    }
-     if (minutes < 10) {
-        minutes = "0" + minutes; 
-    }
-    if (hours < 10) {
-        hours = "0" + hours; 
-    }
-    document.getElementById('countdown').innerHTML =  hours + ":" + minutes + ":" + remainingSeconds;
-    if (seconds == 0) {
-        clearInterval(countdownTimer);
-      var x = document.getElementById("countdown").innerHTML;
-      if(x)
-      window.location.href = ('dashboard1.php');
-    } else {
-        seconds--;
-    }
-}
-var countdownTimer = setInterval('timer()', 1000);
-</script>
+			</nav>
+		</header>
+		<div id="login" class="container">
+			<form class="form-horizontal" action="checkstudentlogin.php" method="POST">
+				<h2 align="center">LOGIN HERE</h2>
+			  <div class="form-group">
+			    <label for="inputEmail3" class="col-sm-2 control-label">User Name</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" id="" name="user" placeholder="User Name" required pattern="[a-zA-Z0-9]+">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+			    <div class="col-sm-10">
+			      <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <button type="submit" class="btn btn-default" name="login1">Sign in</button>
+			    </div>
+			  </div>
+			</form>
+		</div>
+	</body>
+</html>	

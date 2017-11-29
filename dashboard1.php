@@ -1,4 +1,12 @@
-
+<?php
+session_start();
+$_SESSION["emailid"];
+if(!$_SESSION["emailid"])
+    {
+      header("location:studentlogin.php");
+      
+    }
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -74,48 +82,71 @@
 					<div class="navbar-header">
 						<!-- Mobile Toggle Menu Button -->
 						<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-						<a class="navbar-brand" href="index.html"><span >Online Examination Portal</span></a> 
+						<a class="navbar-brand" href="#"><span>Online Examination Portal</span></a> 
 					</div>
-					<div id="navbar" class="navbar-collapse collapse">
+					<div id="navbar" >
 						<ul class="nav navbar-nav navbar-right">
-							<li><h2><span >Welcome</span></h2></li>
+							<li><h2>
+							<span id="countdown" class="timer"></span></h2></li></div>
 						</ul>
 					</div>
 				</div>
 				</nav>
-				<div class="text-right">
-				<h2><span id="countdown" class="timer" ></span></h2>
-				</div>
-				<div class="container well scrol" style="background-color:white,">
-					                                        <b>  <center>
-					                                          <h1 style="color: black"> Exam Instructions for Students</h1>
-					                                          <br> 
+				
+				<div class="container well scroll container-fluid">
+<div class="call-to-action">
+<form action="score.php" method="post" name="exam">
+								<div>
+									
+										
+										<?php
+											include('db.php');
+											$query="SELECT * FROM `exam1` ";
+											$result=$conn->query($query);
+											$no=mysqli_num_rows($result);
+											
 
-<h2 class="text-left" style="color: black">Exam information:</h2></b>
-<h4 class="text-left" style="color: black">
-•	Each question is of 1 mark.
-<br><br><br>
-•	Total time allotted is 2 hours 30 min.
-<br><br><br>
-•	After completing the exam hit the submit button to submit.
-<br><br><br>
-•	In case of connection lost contact invigilator immediately. 
-<br><br><br>
-•	Do not bring any unauthorised material (e.g. written notes, notes in dictionaries, paper, and sticky tape eraser). Pencil cases and &nbsp;&nbsp;glasses cases must not be taken to your desks. These will be checked and confiscated. 
-<br><br><br>
-•	You are allowed to bring tissue Paper and a drink (but not food) into the exam. 
-<br><br><br>
-•	Ensure that you use the washroom before arriving for your exam as you will not be permitted to leave during the first hour. In the case  &nbsp; of listening and oral exams you may not be allowed to leave during the exam. 
 
-				</center></div>
-				<div><ul class="pager">
-  
-    <li><a class="jumbotron" href="dashboard.php" style="color: black;"><b>Start Exam</b></a></li>
-  </ul></div>
+											while($row = mysqli_fetch_array( $result ))
+											{ 
+												
+												$id=$row['id'];
+												$question=$row['ques'];
+												$opta=$row['option_a'];
+												$optb=$row['option_b'];
+												$optc=$row['option_c'];
+												$optd=$row['option_d'];
+												echo "<table>
+												<tr>
+												<td><b>$id</b></td>
+												<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$question</td>
+												</tr>
+												</table>
+
+												<table class='table table-borderless text-left'>
+												<tr class='table table-borderless' align='left'>
+												<html>
+												<td>A.&nbsp;&nbsp;<input type='radio' name='$id' value='a'></button>&nbsp;&nbsp;$opta</td>
+												<td>C.&nbsp;&nbsp;<input type='radio' name='$id' value='c'></button>&nbsp;&nbsp;$optc</td>
+												</tr>
+												<tr class='table table-borderless text-left'>
+												<td>B.&nbsp;&nbsp;<input type='radio' name='$id' value='b'></button>&nbsp;&nbsp;$optb</td>
+												<td>D.&nbsp;&nbsp;<input type='radio' name='$id' value='d'></button>&nbsp;&nbsp;$optd</td>
+												</tr>
+												</html>
+
+												<br>";
+							 				}
+										?>
+									</table>
+								</div>
+
+									<div><center><input type="Submit" name="Submit" class=""></center>
 <script>
-var upgradeTime = 120;
+var upgradeTime = 300;
 var seconds = upgradeTime;
-function timer() {
+function timer() 
+{
     var days        = Math.floor(seconds/24/60/60);
     var hoursLeft   = Math.floor((seconds) - (days*86400));
     var hours       = Math.floor(hoursLeft/3600);
@@ -132,14 +163,26 @@ function timer() {
         hours = "0" + hours; 
     }
     document.getElementById('countdown').innerHTML =  hours + ":" + minutes + ":" + remainingSeconds;
-    if (seconds == 0) {
+    if (seconds == 0) 
+    {
         clearInterval(countdownTimer);
-      var x = document.getElementById("countdown").innerHTML;
+       var x = document.getElementById("countdown").innerHTML;
       if(x)
-      window.location.href = ('dashboard.php');
-    } else {
+      {
+      	document.exam.submit();
+      }
+    } 
+    else 
+    {
         seconds--;
     }
 }
 var countdownTimer = setInterval('timer()', 1000);
 </script>
+</form>
+
+  
+   </ul></div>
+								</div>
+							</div>
+				</div>

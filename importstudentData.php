@@ -1,51 +1,103 @@
 <?php
-session_start();
-include 'db.php';
-$mail  = $_SESSION["username"];
-$query = "SELECT institute FROM institute WHERE email =  '$mail'";
-$result = $db->query($query);
-$row = mysqli_fetch_array($result);
-?> 
-<?php
 //load the database configuration file
 include 'db.php';
-if(isset($_POST['importSubmit'])){
-    
-    //validate whether uploaded file is a csv file
-    $csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
-    if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'],$csvMimes)){
-        if(is_uploaded_file($_FILES['file']['tmp_name'])){
-            
-            //open uploaded csv file with read only mode
-            $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
-            
-            //skip first line
-            fgetcsv($csvFile);
-            
-            //parse data from csv file line by line
-            while(($line = fgetcsv($csvFile)) !== FALSE){
-                //check whether member already exists in database with same email
-                $prevQuery = "SELECT id FROM `".$row['institute']."` WHERE email = '".$line[3]."'";
-                $prevResult = $db->query($prevQuery);
-                if($prevResult->num_rows > 0){
-                    //update member data
-                    $db->query("UPDATE `".$row['institute']."` SET id = '".$line[0]."', name = '".$line[1]."', rollno = '".$line[2]."', email = '".$line[3]."', password = '".$line[4]."', branch = '".$line[5]."' WHERE email = '".$line[3]."'");
-                }else{
-                    //insert member data into database
-                    $db->query("INSERT INTO `".$row['institute']."`  VALUES ('".$line[0]."','".$line[1]."','".$line[2]."','".$line[3]."','".$line[4]."','".$line[5]."')");
-                }
-            }
-            
-            //close opened csv file
-            fclose($csvFile);
-
-            $qstring = '?status=succ';
-        }else{
-            $qstring = '?status=err';
-        }
-    }else{
-        $qstring = '?status=invalid_file';
+session_start();
+$_SESSION["username"];
+if(!$_SESSION["username"])
+    {
+      header("location:login.php");
+      
+    }
+if(!empty($_GET['status'])){
+    switch($_GET['status']){
+        case 'succ':
+            $statusMsgClass = 'alert-success';
+            $statusMsg = 'Students data has been inserted successfully.';
+            break;
+        case 'err':
+            $statusMsgClass = 'alert-danger';
+            $statusMsg = 'Some problem occurred, please try again.';
+            break;
+        case 'invalid_file':
+            $statusMsgClass = 'alert-danger';
+            $statusMsg = 'Please upload a valid CSV file.';
+            break;
+        default:
+            $statusMsgClass = '';
+            $statusMsg = '';
     }
 }
-//redirect to the listing page
-header("Location: importstudentData1.php".$qstring);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <style type="text/css">
+    .panel-heading a{float: right;}
+    #importFrm{margin-bottom: 20px;display: none;}
+    #importFrm input[type=file] {display: inline;}
+  </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <?php if(!empty($statusMsg)){
+        echo '<div class="alert '.$statusMsgClass.'">'.$statusMsg.'</div>';
+    } ?>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Students list
+            <a href="javascript:void(0);" onclick="$('#importFrm').slideToggle();">Add Students</a>
+        </div>
+        <div class="panel-body">
+            <form action="importstudentData1.php" method="post" enctype="multipart/form-data" id="importFrm">
+                <input type="file" name="file" />
+                <input type="submit" class="btn btn-primary" name="importSubmit" value="IMPORT">
+            </form>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>User</th>
+                      <th>Email</th>
+                      <th>Password</th>
+                      <th>Branch</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    //get rows query
+                    $query1 = $conn->query("SELECT institute FROM institute where email='".$_SESSION['username']."' ");
+                    $row1 = $query1->fetch_assoc();
+                    $inst=$row1['institute'];
+                    $query = $conn->query("SELECT * FROM login where institute='".$inst."' ORDER BY id ASC");
+                    if($query->num_rows > 0){ 
+                        while($row = $query->fetch_assoc()){
+                        ?>
+                    <tr>
+                      <td><?php echo $row['id']; ?></td>
+                      <td><?php echo $row['name']; ?></td>
+                      <td><?php echo $row['user']; ?></td>
+                      <td><?php echo $row['email']; ?></td>
+                      <td><?php echo ($row['password']); ?></td>
+                      <td><?php echo ($row['branch']); ?></td>
+                    </tr>
+                    <?php } }else{ ?>
+                    <tr><td colspan="5">No student(s) found.....</td></tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
